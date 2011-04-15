@@ -1,7 +1,6 @@
 /* TODO: Task (b) Please fill in the following lines, then remove this line.
  *
- * author(s):   FIRSTNAME LASTNAME 
- *              (FIRSTNAME2 LASTNAME2)
+ * author(s):   Katrin Rettich
  * modified:    2010-01-07
  *
  */
@@ -130,6 +129,38 @@ void initializeMemory() {
 /* Load a file to memory */
 void loadFile(char* filename) {
     /* TODO: Task (d) implement loadFile */
+	char *buffer;
+	unsigned long fileLen;
+	int i;
+   	word wo;
+	/*Datei aufmachen*/
+	outputStream = fopen(filename, "rb");
+	if (!outputStream)
+	{
+		fprintf(stderr, "Unable to open file %s", filename);
+		return;
+	}
+	/*Dateilaenge finden*/
+	fseek(outputStream, 0, SEEK_END);
+	fileLen=ftell(outputStream);
+	fseek(outputStream, 0, SEEK_SET);
+
+	buffer=(char *)malloc(fileLen+1);
+	if (!buffer)
+	{
+		fprintf(stderr, "Memory error!");
+                fclose(outputStream);
+		return;
+	}
+	/*Dateiinhalte in buffer lesen*/
+	fread(buffer, fileLen, 1, outputStream);
+	fclose(outputStream);
+	/*buffer zerstueckelt als einzelne woerter in memory speichern*/
+	for (i=0; i<sizeof(buffer)-1; i++) {
+        wo = (buffer[i] >> (8*(4-(i+1)))) & 0xFF;
+	storeWord(wo, memoryRegionCounter+i);
+    	}
+	free(buffer);
 }
 
 /* ========================================================================== */

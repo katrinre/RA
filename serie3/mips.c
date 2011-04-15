@@ -1,7 +1,6 @@
 /* TODO: Task (b) Please fill in the following lines, then remove this line.
  *
- * author(s):   FIRSTNAME LASTNAME 
- *              (FIRSTNAME2 LASTNAME2)
+ * author(s):   Katrin Rettich
  * modified:    2010-01-07
  *
  */
@@ -33,6 +32,10 @@ Function functions[FUNCTION_COUNT];
 
 void error(const char *functionName, const char *fileName, int lineNumber, char *message, ...) {
    /* TODO: Task (e) implement error */
+	
+	/*fprintf(stderr, fileName, lineNumber, message, functionName, "undefinedOperation in %s, line %d: %s %s\n");
+        exit(EXIT_FAILURE); 
+printf("%s in %s, line %i: Unknown opcode: %x\n",__func__, __FILE__, __LINE__, instruction->i.opcode);*/
 }
 
 
